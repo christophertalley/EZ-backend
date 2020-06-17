@@ -37,5 +37,11 @@ app.get("/api/external", checkJwt, (req, res) => {
     });
 });
 
+app.get("/api/public",  (req, res) => {
+    res.send({
+        msg: "Public message response"
+    });
+});
+
 // Start the app
 app.listen(5000, () => console.log('API listening on 5000'));
