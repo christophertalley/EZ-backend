@@ -1,13 +1,5 @@
-const express = require("express");
-const cors = require("cors");
 const jwt = require("express-jwt");
 const jwksRsa = require("jwks-rsa");
-
-// Create a new Express app
-const app = express();
-
-// Accept cross-origin requests from the frontend app
-app.use(cors({ origin: 'http://localhost:3000' }));
 
 // Set up Auth0 configuration
 const authConfig = {
@@ -30,18 +22,6 @@ const checkJwt = jwt({
     algorithm: ["RS256"]
 });
 
-// Define an endpoint that must be called with an access token
-app.get("/api/external", checkJwt, (req, res) => {
-    res.send({
-        msg: "Your Access Token was successfully validated!"
-    });
-});
-
-app.get("/api/public",  (req, res) => {
-    res.send({
-        msg: "Public message response"
-    });
-});
-
-// Start the app
-app.listen(5000, () => console.log('API listening on 5000'));
+module.exports = {
+    checkJwt
+}
