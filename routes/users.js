@@ -11,10 +11,6 @@ router.post("/users", checkJwt, asyncHandler(async (req, res, next)=>{
     const {username} = req.body;
     const client = req.db;
     try {
-        // Not quite sure why, but the uri points to the admin database and not my api
-        // To get this to work you have to state db again after db and then provide
-        // the database name.
-
         // Because the way Mongo works we have to first query to check if the user has been created
         const findResult = await client.db("ez-api").collection("users").findOne({ userName: username });
         if (findResult) {
