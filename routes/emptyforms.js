@@ -22,9 +22,19 @@ router.get('/forms/:formId', asyncHandler (async (req, res, next)=>{
 }));
 
 // This route will be used to get all forms for a user
-router.get('/forms', checkJwt, (req, res, next)=> {
+router.get('/:userId/forms', checkJwt, asyncHandler(async(req, res, next)=> {
+    const userid = req.params.userId;
+    const client = req.db;
+    try {
+        const cursor = await client.db("ez-api").collection("emptyForms").find({userId:userid});
+        const forms = await cursor.toArray();
+        console.log(forms);
 
-})
+        res.status(200).send(forms);
+    } catch (e) {
+        console.error(e);
+    }
+}));
 
 // This will be the route to create a new form
 router.post('/forms', checkJwt, asyncHandler(async (req, res, next)=> {
