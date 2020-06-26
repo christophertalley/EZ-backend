@@ -4,7 +4,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 const { checkJwt } = require("./auth");
 const expressMongoDb = require("express-mongo-db");
-const { mongo_user, mongo_pw } = require("./config");
+const { mongo_user, mongo_pw, port } = require("./config");
 
 const indexRouter = require("./routes/index");
 const userRouter = require("./routes/users");
@@ -29,4 +29,4 @@ app.use(emptyFormRouter);
 
 
 // Start the app
-app.listen(5000, () => console.log('API listening on 5000'));
+app.listen(port, () => console.log(`API listening on ${port}`));
