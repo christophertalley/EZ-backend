@@ -16,8 +16,9 @@ const uri = `mongodb+srv://${mongo_user}:${mongo_pw}@ezcluster-eej30.mongodb.net
 // Create a new Express app
 const app = express();
 
+
 // Middlewares
-app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(cors());
 app.use(morgan("dev"));
 app.use(expressMongoDb(uri));
 app.use(express.json());
