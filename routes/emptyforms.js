@@ -7,7 +7,6 @@ const router = express.Router();
 
 // This will be the route to get the empty form to be completed
 router.get('/forms/:formId', asyncHandler (async (req, res, next)=>{
-    console.log(req.params);
 
     const formId = req.params.formId;
     console.log(formId);
@@ -28,7 +27,6 @@ router.get('/:userId/forms', checkJwt, asyncHandler(async(req, res, next)=> {
     try {
         const cursor = await client.db("ez-api").collection("emptyForms").find({userId:userid});
         const forms = await cursor.toArray();
-        console.log(forms);
 
         res.status(200).send(forms);
     } catch (e) {

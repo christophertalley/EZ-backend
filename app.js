@@ -9,6 +9,7 @@ const { mongo_user, mongo_pw, port } = require("./config");
 const indexRouter = require("./routes/index");
 const userRouter = require("./routes/users");
 const emptyFormRouter = require("./routes/emptyforms");
+const formDataRouter = require("./routes/formData");
 
 // Declare URI for connection to Mongo Client
 const uri = `mongodb+srv://${mongo_user}:${mongo_pw}@ezcluster-eej30.mongodb.net/ez-api?retryWrites=true&w=majority`;
@@ -27,6 +28,8 @@ app.use(express.json());
 app.use(indexRouter);
 app.use(userRouter);
 app.use(emptyFormRouter);
+app.use(formDataRouter);
+
 
 
 // Start the app
