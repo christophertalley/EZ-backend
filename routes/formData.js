@@ -17,8 +17,16 @@ router.post('/forms/:formId/data', asyncHandler(async(req, res, next)=>{
 
 // This route will be used by the creator to see all of the data submitted
 // for a specific form
-router.get('/forms/:formId/data', checkJwt, (req, res, next)=> {
-
-});
+router.get('/forms/:formId/data', checkJwt, asyncHandler(async(req, res, next)=> {
+    const formId = req.params.formId;
+    const client = req.db;
+    try {
+        const cursor = await client.db("ez-api").collection("formData").find({ formId: formId });
+        const formResponses = await cursor.toArray();
+        res.status(201).send(formResponses);
+    } catch (e) {
+        console.error(e)
+    }
+}));
 
 module.exports = router;

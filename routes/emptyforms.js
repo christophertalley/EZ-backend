@@ -7,9 +7,8 @@ const router = express.Router();
 
 // This will be the route to get the empty form to be completed
 router.get('/forms/:formId', asyncHandler (async (req, res, next)=>{
-
     const formId = req.params.formId;
-    console.log(formId);
+
     const objId = new ObjectID(formId);
     const client = req.db;
     try {
